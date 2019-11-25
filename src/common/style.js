@@ -20,14 +20,14 @@ const styles = StyleSheet.create({
         bottom: 0,
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor:'#777',
+        backgroundColor:'#444',
         opacity:0.9,
         zIndex:999999999999999999
   },
   loaderView: {
         width:scale(250),
         height:verticalScale(60),
-        backgroundColor:'#54C540',
+        backgroundColor:'#888',
         borderRadius:5,
         flexDirection:'row',
         alignItems:'center'
@@ -42,144 +42,289 @@ const styles = StyleSheet.create({
   primaryBg: {
     backgroundColor:'#444444',
   },
-  widthEdit:
-  {
-    width:width - 60
+  fullScreen:{
+    flex:1
   },
-  whiteBG:{
-  	backgroundColor:'#fff'
+  centerScreen:{
+    alignItems:'center',
+    justifyContent:'center'
   },
-  bg:{
-  	backgroundColor:'#F7FCF1'
+  centerHorizontal:{
+    alignItems:'center'
   },
-  centerLogo:{
-  	marginTop:height / 3 - 85,
-  	marginLeft:width / 2 - 160
+  centerVertical:{
+    justifyContent:'center'
   },
-  splashLogosize:
-  {
-  	width:190,
-  	height:78
+  bottomRadius:{
+    borderBottomLeftRadius:20,
+    borderBottomRightRadius:20
   },
-  flexFull:{
-  	flex:1
+  photoContainer:{
+    borderWidth:1,
+    borderStyle:'solid',
+    borderColor:'#B141FB'
   },
-  vwFrame:
-  {
-	backgroundColor:'#FFFFFF',
-  	marginTop:20,
-  	padding:15,
-  	borderColor:'#99DD57',
-  	borderRadius:10,
-  	borderWidth:1
+  photoSize:{
+    width:50,
+    height:50,
+    borderRadius:25
   },
-  vwLogin:
-  {
-  	backgroundColor:'#FFFFFF',
-  	width:300,
-  	marginTop:20,
-  	padding:15,
-  	borderColor:'#99DD57',
-  	borderRadius:10,
-  	borderWidth:1
+  btn:{
+    borderRadius:10,
+    height:50,
+    padding:10
   },
-  inputForm:{
-  	height:40,
-  	marginTop:10,
-  	borderRadius:10,
-  	borderColor:'#EDEDEA',
-  	borderWidth:1,
-  	padding:5,
+  btnText:{
+    color:'#fff',
+    fontWeight: 'bold',
+    fontSize:16,
+    lineHeight:26,
+    flex:1,
+    textAlign:'center'
   },
-  inputFormWrap:{
-  	marginTop:10,
-  	borderRadius:10,
-  	borderColor:'#EDEDEA',
-  	borderWidth:1,
-  	padding:5,
+  inputSms:{
+    height:40,marginLeft:5,fontSize:25
   },
-  loginButton:{
-  	borderWidth:1,
-  	borderRadius:5,
-  	textAlign:'center',
-  	borderColor:'#5DA1DA',
-  	backgroundColor:'#F2F8FD',
-  	color:'#5DA1DA',
-  	padding:10,
-  	width:80
+  textWarning:{
+    marginLeft:10,
+    paddingLeft:20,
+    paddingRight:20,
+    borderRadius:10
   },
-  imgProfile:{
-  	width:70,
-  	height:70,
-  	borderRadius:35
+  vwTopBar:{
+    height:70,width:'100%',flexDirection:'row',alignItems:'center'
   },
-  txtName:
-  {
-  	fontSize:20,
-  	color:'#969693',
-  	padding:5
+  btnToggle:{
+    backgroundColor:'#9723F2',marginLeft:20,marginRight:20
   },
-  txtRole:
-  {
-  	fontSize:16,
-  	color:'#7FB2E8',
-  	padding:5
+  btnToggleOn:{
+    backgroundColor:'#CB9CF0',marginLeft:20,marginRight:20
   },
-  btnPrimary:
-  {
-	borderWidth:1,
-  	borderRadius:5,
-  	textAlign:'center',
-  	borderColor:'#5DA1DA',
-  	backgroundColor:'#F2F8FD',
-  	color:'#5DA1DA',
-  	padding:10,
+  btnAgreeOff:{
+    width:30,height:30,borderRadius:15,backgroundColor:'rgba(212, 168, 247, 0.5)',alignItems:'center',justifyContent:'center'
   },
-  btnGreen:
-  {
-  	borderWidth:1,
-  	borderRadius:5,
-  	textAlign:'center',
-  	borderColor:'#AFC996',
-  	backgroundColor:'#fff',
-  	padding:10,
-  },
-  imgIcon:
-  {
-  	width:40,
-  	height:40
-  },
-  txtFieldName:
-  {
-  	color:'#AFC996',
-  	fontSize:16,
-  	fontWeight:'bold'
-  },
-  vwTeam:{
-  	margin:2,
-  	padding:5,
-    height:30,
-  	borderRadius:5,
-  	backgroundColor:'#B7DBEE'
-  },
-  imgSmallIcon:
-  {
-  	width:15,
-  	height:15
-  },
-  vwCellContact:
-  {
-  	borderColor:'#ccc',
-  	borderWidth:1,
-  	backgroundColor:'#F2F2F2',
-  	flexDirection:'row',
-  	marginTop:3,
-  	justifyContent:'center',
-  	alignItems:'center',
-  	padding:5
+  btnAgreeOn:{
+    width:30,height:30,borderRadius:15,backgroundColor:'#9723F2',alignItems:'center',justifyContent:'center'
   }
 });
 
+export var mapStyle=[
+  {
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#212121"
+      }
+    ]
+  },
+  {
+    "elementType": "labels.icon",
+    "stylers": [
+      {
+        "visibility": "off"
+      }
+    ]
+  },
+  {
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#757575"
+      }
+    ]
+  },
+  {
+    "elementType": "labels.text.stroke",
+    "stylers": [
+      {
+        "color": "#212121"
+      }
+    ]
+  },
+  {
+    "featureType": "administrative",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#757575"
+      }
+    ]
+  },
+  {
+    "featureType": "administrative.country",
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#9e9e9e"
+      }
+    ]
+  },
+  {
+    "featureType": "administrative.land_parcel",
+    "stylers": [
+      {
+        "visibility": "off"
+      }
+    ]
+  },
+  {
+    "featureType": "administrative.locality",
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#bdbdbd"
+      }
+    ]
+  },
+  {
+    "featureType": "poi",
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#757575"
+      }
+    ]
+  },
+  {
+    "featureType": "poi.business",
+    "elementType": "geometry.fill",
+    "stylers": [
+      {
+        "color": "#6c6c6c"
+      }
+    ]
+  },
+  {
+    "featureType": "poi.park",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#181818"
+      }
+    ]
+  },
+  {
+    "featureType": "poi.park",
+    "elementType": "geometry.fill",
+    "stylers": [
+      {
+        "color": "#48bcb0"
+      }
+    ]
+  },
+  {
+    "featureType": "poi.park",
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#616161"
+      }
+    ]
+  },
+  {
+    "featureType": "poi.park",
+    "elementType": "labels.text.stroke",
+    "stylers": [
+      {
+        "color": "#1b1b1b"
+      }
+    ]
+  },
+  {
+    "featureType": "road",
+    "elementType": "geometry.fill",
+    "stylers": [
+      {
+        "color": "#2c2c2c"
+      }
+    ]
+  },
+  {
+    "featureType": "road",
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#8a8a8a"
+      }
+    ]
+  },
+  {
+    "featureType": "road.arterial",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#373737"
+      }
+    ]
+  },
+  {
+    "featureType": "road.highway",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#3c3c3c"
+      }
+    ]
+  },
+  {
+    "featureType": "road.highway.controlled_access",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#4e4e4e"
+      }
+    ]
+  },
+  {
+    "featureType": "road.local",
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#616161"
+      }
+    ]
+  },
+  {
+    "featureType": "transit",
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#757575"
+      }
+    ]
+  },
+  {
+    "featureType": "water",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#000000"
+      }
+    ]
+  },
+  {
+    "featureType": "water",
+    "elementType": "geometry.fill",
+    "stylers": [
+      {
+        "color": "#59dff0"
+      },
+      {
+        "lightness": -15
+      }
+    ]
+  },
+  {
+    "featureType": "water",
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#3d3d3d"
+      }
+    ]
+  }
+];
+
 export default {
-  styles 
+  styles
 };

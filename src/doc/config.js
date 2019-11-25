@@ -1,11 +1,9 @@
 export const Config = {
     URLS:[],
-    DOMAIN_URL:'https://api.sprigghr.com',
-    BASE_URL:'',
+    DOMAIN_URL:'',
+    BASE_URL:'http://3.86.233.79/',
     ContentType : 'application/json',
-    Accept:'application/vnd.cedar.v2',
-    Version:'5.3',
-    AuthToken:'',
-    SSOToken:'',
-
+    Accept:'',
+    Version:'1.0',
+    AuthToken:''
 }
