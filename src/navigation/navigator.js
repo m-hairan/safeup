@@ -18,6 +18,7 @@ import Terms from '../screens/contact/terms';
 import Profile from '../screens/contact/profile';
 import Home from '../screens/home/home';
 import About from '../screens/menu/about';
+import Contacts from '../screens/contact/contacts';
 
 
 
@@ -35,14 +36,15 @@ const RootStack = createStackNavigator(
     Terms: { screen: Terms ,navigationOptions:{header: null}},
     Profile: { screen: Profile ,navigationOptions:{header: null}},
     Home: { screen: Home ,navigationOptions:{header: null}},
-    About: { screen: About ,navigationOptions:{header: null}}
+    About: { screen: About ,navigationOptions:{header: null}},
+    Contacts: { screen: Contacts ,navigationOptions:{header: null}}
     
   },
   { 
-    initialRouteName: Platform.OS === 'Android' ? 'Splash' : 'Splash2'
+    initialRouteName: Platform.OS === 'android' ? 'Splash' : 'Splash2'
   }
 );
-
+  //console.log("platform========",Platform.OS)
 const AppNavigator = createAppContainer(RootStack);
 export default AppNavigator;
 

@@ -11,10 +11,14 @@ export default class SelectAgeScreen extends Component {
   constructor(props) {
     super(props);    
     self = this;
+    const {params} = this.props.navigation.state;
     this.state = {
         age:0,
-        isShowSelectAge : true
+        isShowSelectAge : true,
+        first_name : params.params.first_name,
+        last_name : params.params.last_name 
     };
+    //console.log("firstname_lastname:"+params.params.first_name+","+params.params.last_name)
   }
   componentDidMount() {    
         
@@ -32,7 +36,14 @@ export default class SelectAgeScreen extends Component {
   {
       if (this.state.age > 0)
       {
-          this.props.navigation.navigate('SelectGender');
+          this.props.navigation.navigate('SelectGender', 
+          {
+            params :{
+              age : this.state.age,
+              first_name : this.state.first_name,
+              last_name : this.state.last_name
+            }
+          });//send the parames
       }
       // if (this.state.age > 0 && this.state.isShowSelectAge)
       // {
@@ -47,7 +58,17 @@ export default class SelectAgeScreen extends Component {
 
     return (
         <View style={[styles.fullScreen,styles.centerHorizontal,{backgroundColor:'#2A3139'}]}>
-          <StatusBar hidden={true} />
+          <StatusBar hidden={true} />          
+          {global.deviceLocale == 'he-IL'?
+          <View style={[styles.vwTopBar_he]}>
+                <TouchableOpacity style={{height:50,marginLeft:20,justifyContent:'center'}} onPress={()=> this.onBack()}>
+                    <View style={{flexDirection:'row'}}>
+                        <Text style={{marginLeft:10,fontSize:18,color:'#fff'}}>Back</Text>
+                        <Image style={{width:12,height:21, marginLeft:10, marginRight:10, marginTop:3}} source={require('../../assets/ic_back.png')}/>
+                    </View>
+                </TouchableOpacity>
+          </View>
+          :
           <View style={[styles.vwTopBar]}>
                 <TouchableOpacity style={{height:50,marginLeft:20,justifyContent:'center'}} onPress={()=> this.onBack()}>
                     <View style={{flexDirection:'row'}}>
@@ -56,6 +77,7 @@ export default class SelectAgeScreen extends Component {
                     </View>
                 </TouchableOpacity>
           </View>
+          }
           <View style={{justifyContent:'center',flex:1}}>
               <Text style={{color:'#fff',fontSize:26,fontWeight:'bold',marginLeft:20,marginRight:20,textAlign:'center'}}>Hey</Text>
               <Text style={{color:'#fff',fontSize:20,marginLeft:20,marginRight:20,marginTop:10,marginBottom:20,textAlign:'center'}}>As a SafeUPer who is an adult, you are allowed to help other women. Not yet 18 years old? no worries, you can still call others to help you. {"\n"}{"\n"}Are you over 18 yours old?</Text>

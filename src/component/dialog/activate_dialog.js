@@ -66,9 +66,15 @@ class ActivateDialog extends Component {
     {
         //this.props.navigation.navigate('About');
     }
+
     delete()
     {
         this.setState({isDelete:true})
+        this.forceUpdate();
+    }
+    close() 
+    {
+        this.setState({isMenuOpen:false})
         this.forceUpdate();
     }
     goLogout()
@@ -81,8 +87,10 @@ class ActivateDialog extends Component {
         this.setState({isDelete:false})
         this.forceUpdate();
     }
-
-
+    // chooseGuardians() {
+        
+    // }
+    
     render() {
         return (
             <View style={{position:'absolute',width:'100%',height:'100%'}}>
@@ -95,30 +103,30 @@ class ActivateDialog extends Component {
                         <View style={{flexDirection:'row'}}>
                             <TouchableOpacity style={{flex:1}} onPress={()=> this.openMenu()}>
                                 <View style={[styles.centerScreen]}>
-                                    <Image resizeMethod="stretch" style={{padding:20,marginTop:10,width:90,height:90,borderRadius:45,backgroundColor:'#2A292B',borderWidth:2,borderColor:'#CB9CF0'}}source={require('../../assets/ic_profile_placeholder.png')}/>
+                                    <Image resizeMode="stretch" style={{padding:20,marginTop:10,width:90,height:90,borderRadius:45,backgroundColor:'#2A292B',borderWidth:2,borderColor:'#CB9CF0'}}source={require('../../assets/ic_profile_placeholder.png')}/>
                                     <Text style={{marginTop:10,color:'#fff'}}>Wating</Text>
                                 </View>
                             </TouchableOpacity>
                             <TouchableOpacity style={{flex:1}} onPress={()=> this.openMenu()}>
                                 <View style={[styles.centerScreen]}>
-                                    <Image resizeMethod="stretch" style={{padding:20,marginTop:10,width:90,height:90,borderRadius:45,backgroundColor:'#2A292B',borderWidth:2,borderColor:'#CB9CF0'}}source={require('../../assets/ic_profile_placeholder.png')}/>
+                                    <Image resizeMode="stretch" style={{padding:20,marginTop:10,width:90,height:90,borderRadius:45,backgroundColor:'#2A292B',borderWidth:2,borderColor:'#CB9CF0'}}source={require('../../assets/ic_profile_placeholder.png')}/>
                                     <Text style={{marginTop:10,color:'#fff'}}>Wating</Text>
                                 </View>
                             </TouchableOpacity>
                             <TouchableOpacity style={{flex:1}} onPress={()=> this.openMenu()}>
                                 <View style={[styles.centerScreen]}>
-                                    <Image resizeMethod="stretch" style={{padding:20,marginTop:10,width:90,height:90,borderRadius:45,backgroundColor:'#2A292B',borderWidth:2,borderColor:'#CB9CF0'}}source={require('../../assets/ic_profile_placeholder.png')}/>
+                                    <Image resizeMode="stretch" style={{padding:20,marginTop:10,width:90,height:90,borderRadius:45,backgroundColor:'#2A292B',borderWidth:2,borderColor:'#CB9CF0'}}source={require('../../assets/ic_profile_placeholder.png')}/>
                                     <Text style={{marginTop:10,color:'#fff'}}>Wating</Text>
                                 </View>
                             </TouchableOpacity>
                         </View>
                         <View style={{backgroundColor:'#000',marginLeft:30,marginRight:30,height:2,marginTop:20}}></View>
                         <View style={{flexDirection:'row',alignItems:'center',marginTop:10}}>
-                            <Image resizeMethod="stretch" style={{marginLeft:20,width:20,height:20}}source={require('../../assets/ic_phone_on.png')}/>
+                            <Image resizeMode="stretch" style={{marginLeft:20,width:20,height:20}}source={require('../../assets/ic_phone_on.png')}/>
                             <Text style={{marginLeft:10,color:'#fff',flex:1}}>Call safe-line conference line</Text>
                             <TouchableOpacity>
                                 <View style={{width:100,height:30,marginRight:20,backgroundColor:'#FF4F72',borderRadius:15,flexDirection:'row',alignItems:'center'}}>
-                                    <Image resizeMethod="stretch" style={{marginLeft:10,width:20,height:20}}source={require('../../assets/ic_phone.png')}/>
+                                    <Image resizeMode="stretch" style={{marginLeft:10,width:20,height:20}}source={require('../../assets/ic_phone.png')}/>
                                     <View style={[{backgroundColor:'#9A273E',height:20,marginLeft:10,flex:1,marginRight:10,borderRadius:10},styles.centerScreen]}>
                                         <Text style={{color:'#fff',textAlign:'center',fontSize:10,fontWeight:'bold'}}>00:03</Text>
                                     </View>
@@ -126,11 +134,11 @@ class ActivateDialog extends Component {
                             </TouchableOpacity>
                         </View>
                         <View style={{flexDirection:'row',alignItems:'center',marginTop:10}}>
-                            <Image resizeMethod="stretch" style={{marginLeft:20,width:18,height:20}}source={require('../../assets/ic_shield.png')}/>
+                            <Image resizeMode="stretch" style={{marginLeft:20,width:18,height:20}}source={require('../../assets/ic_shield.png')}/>
                             <Text style={{marginLeft:10,color:'#fff',flex:1}}>Share my location with my guardians</Text>
                             <TouchableOpacity>
                                 <View style={{width:100,height:30,marginRight:20,backgroundColor:'#C987FD',borderRadius:15,flexDirection:'row',alignItems:'center'}}>
-                                    <Image resizeMethod="stretch" style={{marginLeft:10,width:20,height:20}}source={require('../../assets/ic_shield_off.png')}/>
+                                    <Image resizeMode="stretch" style={{marginLeft:10,width:20,height:20}}source={require('../../assets/ic_shield_off.png')}/>
                                     <View style={[{backgroundColor:'#9723F2',height:20,marginLeft:10,flex:1,marginRight:10,borderRadius:10},styles.centerScreen]}>
                                         <Text style={{color:'#fff',textAlign:'center',fontSize:10,fontWeight:'bold'}}>Shared</Text>
                                     </View>
@@ -138,11 +146,11 @@ class ActivateDialog extends Component {
                             </TouchableOpacity>
                         </View>
                         <View style={{flexDirection:'row',alignItems:'center',marginTop:10}}>
-                            <Image resizeMethod="stretch" style={{marginLeft:20,width:20,height:12}}source={require('../../assets/ic_camera.png')}/>
+                            <Image resizeMode="stretch" style={{marginLeft:20,width:20,height:12}}source={require('../../assets/ic_camera.png')}/>
                             <Text style={{marginLeft:10,color:'#fff',flex:1}}>Video share live</Text>
                             <TouchableOpacity>
                                 <View style={{width:100,height:30,marginRight:20,backgroundColor:'#FF4F72',borderRadius:15,flexDirection:'row',alignItems:'center'}}>
-                                    <Image resizeMethod="stretch" style={{marginLeft:10,width:20,height:20}}source={require('../../assets/ic_camera_off.png')}/>
+                                    <Image resizeMode="stretch" style={{marginLeft:10,width:20,height:20}}source={require('../../assets/ic_camera_off.png')}/>
                                     <View style={[{backgroundColor:'#9A273E',height:20,marginLeft:10,flex:1,marginRight:10,borderRadius:10},styles.centerScreen]}>
                                         <Text style={{color:'#fff',textAlign:'center',fontSize:10,fontWeight:'bold'}}>REC</Text>
                                     </View>
@@ -154,12 +162,14 @@ class ActivateDialog extends Component {
 
                 <Animated.View style={[{position:'absolute',backgroundColor:'rgba(42, 49, 57, 0.8)',width:'100%',left:0,height:300,bottom:0,marginBottom:this.vwTop},styles.bottomRadius]}>
                     <View>
-                        <TouchableOpacity  style={{marginLeft:20,marginRight:20,marginTop:20}} onPress={()=> this.openHelp()}>
+                        {/* <TouchableOpacity  style={{marginLeft:20,marginRight:20,marginTop:20}} onPress={()=> this.openHelp()}> */}
+                        <TouchableOpacity  style={{marginLeft:20,marginRight:20,marginTop:20}} onPress={()=> this.props.chooseGuardians()}>
                             <View style={[styles.btn,{backgroundColor:'#C987FD',flexDirection:'row',borderRadius:10}]}>
                                 <Text style={[styles.btnText]}>Add My Guardians</Text>
                             </View>
                         </TouchableOpacity>
-                        <TouchableOpacity  style={{marginLeft:20,marginRight:10,marginTop:20}} onPress={()=> this.openHelp()}>
+                        {/* <TouchableOpacity  style={{marginLeft:20,marginRight:10,marginTop:20}} onPress={()=> this.openHelp()}> */}
+                        <TouchableOpacity  style={{marginLeft:20,marginRight:10,marginTop:20}}>
                             <View style={[styles.btn,{backgroundColor:'#64CAFF',flexDirection:'row',borderRadius:10}]}>
                                 <Text style={[styles.btnText]}>Call Police</Text>
                             </View>
@@ -169,7 +179,7 @@ class ActivateDialog extends Component {
 
                 {
                     this.state.isMenuOpen?
-                    <MenuGuardian onLogout={this.logout.bind(this)} onDelete={this.delete.bind(this)} onAbout={this.about.bind(this)} />:
+                    <MenuGuardian onLogout={this.logout.bind(this)} onDelete={this.delete.bind(this)} onAbout={this.about.bind(this)} onClose={this.close.bind(this)}/>:
                     null
                 }
                 {

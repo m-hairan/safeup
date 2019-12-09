@@ -44,6 +44,11 @@ target 'SafeUp' do
   pod 'Google-Maps-iOS-Utils' # Remove this line if you don't want to support GoogleMaps on iOS
   
 
+
+  pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
+
+
+
   target 'SafeUpTests' do
     inherit! :search_paths
     # Pods for testing

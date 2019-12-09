@@ -112,16 +112,19 @@ export default class NearbyScreen extends Component {
     serviceConfirmCode(phone,smscode)
     .then(res=>{ 
         stopLoader(this);
-        let token = res.token;
+        //let token = res.token;
         Globals.smsCode = smscode;
-        DefaultPreference.setMultiple({phone:phone,token:token,smscode:smscode}).then(function(values) 
-        {
-            self.setState({isShowVerifyPhone:false});
-            self.goFacebook();
-        })
-        .catch(err=>{
+        Config.AuthToken = res.token;
+        // serviceConfirmCodeDefaultPreference.setMultiple({phone:phone,token:token,smscode:smscode}).then(function(values) 
+        // {
+        //     self.setState({isShowVerifyPhone:false});
+        //     self.goFacebook();
+        // })
+        // .catch(err=>{
             
-        });
+        // });
+        self.setState({isShowVerifyPhone:false});
+        self.goFacebook();
 
     }).catch(err=>{
         stopLoader(this);

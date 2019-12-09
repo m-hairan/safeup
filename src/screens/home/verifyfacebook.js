@@ -36,7 +36,8 @@ export default class VerifyFacebookScreen extends Component {
   {
       self.props.navigation.state.params.onComplete('0');
       self.props.navigation.goBack();
-      //this.props.navigation.navigate('Register');
+      //uncommented by Pascal again
+      this.props.navigation.navigate('Register');
   }
   onBack()
   {

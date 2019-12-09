@@ -133,6 +133,7 @@ android {
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
+        multiDexEnabled true
     }
     splits {
         abi {
@@ -179,8 +180,29 @@ android {
 }
 
 dependencies {
+    implementation project(':react-native-push-notification')
+    implementation project(':react-native-vector-icons')
+    implementation project(':react-native-fbsdk')
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation "com.facebook.react:react-native:+"  // From node_modules
+    implementation 'com.facebook.android:facebook-android-sdk:[4,5)'
+
+    implementation(project(':react-native-maps')){
+       exclude group: 'com.google.android.gms', module: 'play-services-base'
+       exclude group: 'com.google.android.gms', module: 'play-services-maps'
+   }
+   implementation 'com.google.android.gms:play-services-base:16.0.1'
+   implementation 'com.google.android.gms:play-services-maps:16.0.0'
+    
+//    implementation 'com.google.android.gms:play-services-gcm:17.0.0'
+    implementation 'com.google.firebase:firebase-core:17.2.1'
+    implementation 'com.google.firebase:firebase-messaging:20.0.1'
+
+    implementation 'com.android.support:multidex:1.0.3'
+   
+//    implementation 'com.google.firebase:firebase-auth:19.0.0'
+//    implementation 'com.google.firebase:firebase-database:16.0.1'
+   
 
     if (enableHermes) {
         def hermesPath = "../../node_modules/hermes-engine/android/";
@@ -197,5 +219,7 @@ task copyDownloadableDepsToLibs(type: Copy) {
     from configurations.compile
     into 'libs'
 }
-
+apply plugin: 'com.google.gms.google-services'
 apply from: file("../../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesAppBuildGradle(project)
+
+

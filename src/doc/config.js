@@ -5,5 +5,6 @@ export const Config = {
     ContentType : 'application/json',
     Accept:'',
     Version:'1.0',
-    AuthToken:''
+    AuthToken:'',
+    OpenStatus:''
 }

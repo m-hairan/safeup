@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
     textAlign:'center'
   },
   inputSms:{
-    height:40,marginLeft:5,fontSize:25
+    height:40,marginLeft:5,fontSize:23, paddingBottom:4
   },
   textWarning:{
     marginLeft:10,
@@ -92,7 +92,10 @@ const styles = StyleSheet.create({
     borderRadius:10
   },
   vwTopBar:{
-    height:70,width:'100%',flexDirection:'row',alignItems:'center'
+    height:60,width:'100%',flexDirection:'row',alignItems:'center',
+  },
+  vwTopBar_he:{
+    height:60,width:'100%',flexDirection:'row-reverse',alignItems:'center',
   },
   btnToggle:{
     backgroundColor:'#9723F2',marginLeft:20,marginRight:20

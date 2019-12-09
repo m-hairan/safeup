@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "198057160299",
+    "firebase_url": "https://safeup-33564.firebaseio.com",
+    "project_id": "safeup-33564",
+    "storage_bucket": "safeup-33564.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:198057160299:android:200ab6ce1164b24d8acb2e",
+        "android_client_info": {
+          "package_name": "com.safeup"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "198057160299-mpo6t9hlgosbo0othvd9litaica2lush.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.safeup",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "198057160299-bhuj0oporae27upvgc3gn3v9shbglr8a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBvDa-RJORd32qBBGnEEOYz-i3JFne8GLs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "198057160299-bhuj0oporae27upvgc3gn3v9shbglr8a.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import {Linking,Animated,Text,View,TouchableOpacity,TextInput} from 'react-native';
+import {Linking,Animated,Text,View,TouchableOpacity,TextInput, AsyncStorage} from 'react-native';
 import { scale, verticalScale } from '../../common/scale';
 import Styles from '../../common/style';
 import {activateLoader,stopLoader} from '../../common/utils';
 import CountryPicker from 'react-native-country-picker-modal';
 import Modal from "react-native-modal";
 import {serviceRegister,serviceGetLocationInfo} from '../../service/api';
+import I18n from 'react-native-i18n';
 
 const { styles } = Styles;
 var self= null;
@@ -27,7 +28,7 @@ class VerifyPhoneDialog extends Component {
             isSmsSent:false,
             smscode:'',
             phone:'',
-            countDown:59
+            countDown:59,           
         };
     }
     shouldComponentUpdate(nextProps) {
@@ -88,16 +89,43 @@ class VerifyPhoneDialog extends Component {
             this.forceUpdate();
             return;
         }
-        serviceRegister("+" + this.state.phoneCode + this.state.phone)
-        .then(res=>{ 
-            console.warn(res);
-            this.setState({isSmsSent:true});
-            this.startCountDown();
-            this.forceUpdate();
-        }).catch(err=>{
-            //this.setState({isSmsSent:true});    
-            //this.setState({isShowVerifyAlert:true});
+        
+        ///////The real part//////
+        let fcmToken = AsyncStorage.getItem('fcmToken');
+        fcmToken.then(res => {
+            console.log(res);
+            serviceRegister("+" + this.state.phoneCode + this.state.phone, res)
+            .then(res=>{ 
+                console.warn(res);
+                this.setState({isSmsSent:true});
+                this.startCountDown();
+                this.forceUpdate();
+            }).catch(err=>{
+                //this.setState({isSmsSent:true});    
+                //this.setState({isShowVerifyAlert:true});
+                console.log("Error");
+            });
         });
+        // if(fcmToken) {
+        //     serviceRegister("+" + this.state.phoneCode + this.state.phone, fcmToken)
+        //     .then(res=>{ 
+        //         console.warn(res);
+        //         this.setState({isSmsSent:true});
+        //         this.startCountDown();
+        //         this.forceUpdate();
+        //     }).catch(err=>{
+        //         //this.setState({isSmsSent:true});    
+        //         //this.setState({isShowVerifyAlert:true});
+        //         console.log("Error");
+        //     });
+        // } else {
+        //     console.log("No token, pls wait...");
+        // }
+        ///////replaced part//////
+        // this.setState({isSmsSent:true});
+        // this.startCountDown();
+        // this.forceUpdate();
+        ///////replaced part end//////
     }
     sendAgain()
     {
@@ -140,14 +168,29 @@ class VerifyPhoneDialog extends Component {
         });
     }
 
-    render() {
+    render() {        
         return (
             <Animated.View style={[{position:'absolute',backgroundColor:'#2A3139',width:'100%',height:400,marginTop:this.vwTop},styles.bottomRadius]}>
                 {
                     !this.state.isSmsSent?
                     <View>
                         <Text style={{color:'#fff',fontSize:24,lineHeight:28,marginTop:40,fontWeight:'bold',textAlign:'center'}}>Great ! We found many near by guardians and safe zones</Text>
-                        <Text style={{color:'#fff',fontSize:16,lineHeight:19,marginTop:10,fontWeight:'normal',textAlign:'center'}}>To know their locations please verifiy your mobile number</Text>
+                        <Text style={{color:'#fff',fontSize:16,lineHeight:19,marginTop:10,fontWeight:'normal',textAlign:'center'}}>To know their locations please verifiy your mobile number</Text>   
+                        {global.deviceLocale == 'he-IL'?
+                        <View style={{flexDirection:'row-reverse',backgroundColor:'#fff',marginLeft:20,marginRight:20,marginTop:50,borderRadius:10,height:50,alignItems:'center',paddingLeft:15,paddingRight:15}}>
+                            <CountryPicker
+                                ref={'countryPicker'}
+                                closeable
+                                style={{marginLeft:0}}
+                                countryCode={this.state.countryCode}
+                                withCallingCode = {true}
+                                onSelect = {(country) => this.onSelectCountry(country)}
+                                // styles={countryPickerCustomStyles}
+                                translation='eng'/>
+                            <Text>+{this.state.phoneCode}</Text>
+                            <TextInput  keyboardType="phone-pad" style={{flex:1,height:40,marginLeft:5}} onChangeText={(text) => this.setState({phone:text})}></TextInput>
+                        </View>
+                        :
                         <View style={{flexDirection:'row',backgroundColor:'#fff',marginLeft:20,marginRight:20,marginTop:50,borderRadius:10,height:50,alignItems:'center',paddingLeft:15,paddingRight:15}}>
                             <CountryPicker
                                 ref={'countryPicker'}
@@ -161,6 +204,7 @@ class VerifyPhoneDialog extends Component {
                             <Text>+{this.state.phoneCode}</Text>
                             <TextInput  keyboardType="phone-pad" style={{flex:1,height:40,marginLeft:5}} onChangeText={(text) => this.setState({phone:text})}></TextInput>
                         </View>
+                        }
                         <TouchableOpacity style={[{backgroundColor:'#9723F2',marginTop:30,marginLeft:20,marginRight:20},styles.btn]} onPress={()=> this.onSendSms()}>
                             <Text style={[styles.btnText]}>NEXT</Text>
                         </TouchableOpacity>
@@ -171,6 +215,16 @@ class VerifyPhoneDialog extends Component {
                     <View>
                         <Text style={{color:'#fff',fontSize:24,lineHeight:28,marginTop:40,fontWeight:'bold',textAlign:'center'}}>Verifcation code </Text>
                         <Text style={{color:'#fff',fontSize:16,lineHeight:19,marginTop:10,fontWeight:'normal',textAlign:'center'}}>A verification codes has been sent to {this.state.phoneCode + this.state.phone}</Text>
+                        {global.deviceLocale == 'he-IL'?
+                        <View style={{flexDirection:'row-reverse',backgroundColor:'#fff',marginLeft:20,marginRight:20,marginTop:50,borderRadius:10,height:80,alignItems:'center',justifyContent:'center',paddingLeft:15,paddingRight:15}}>
+                            <Text style={{fontSize:25}}>S U</Text>
+                            <View>
+                                <TextInput maxLength={6} ref={ref => this.inputCode = ref} keyboardType="phone-pad" style={[styles.inputSms,{width:100,textAlign:'center'}]} onChangeText={(text) => this.setState({smscode:text})}></TextInput>
+                                <View style={{height:1,backgroundColor:'#000',width:100,marginLeft:5}}></View>
+                            </View>
+                            
+                        </View>
+                        :
                         <View style={{flexDirection:'row',backgroundColor:'#fff',marginLeft:20,marginRight:20,marginTop:50,borderRadius:10,height:80,alignItems:'center',justifyContent:'center',paddingLeft:15,paddingRight:15}}>
                             <Text style={{fontSize:25}}>S U</Text>
                             <View>
@@ -179,6 +233,7 @@ class VerifyPhoneDialog extends Component {
                             </View>
                             
                         </View>
+                        }
                         <TouchableOpacity style={[{backgroundColor:'#9723F2',marginTop:30,marginLeft:20,marginRight:20},styles.btn]} onPress={this.props.onNext("+" + this.state.phoneCode + this.state.phone,this.state.smscode)}>
                             <Text style={[styles.btnText]}>NEXT</Text>
                         </TouchableOpacity>

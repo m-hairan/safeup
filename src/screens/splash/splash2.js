@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {Image,StatusBar, View,Text} from 'react-native';
 
 import Styles from '../../common/style';
-
+import {Config} from '../../doc/config';
 const { styles } = Styles;
 
 var self= null;
@@ -11,7 +11,8 @@ export default class Splash2Screen extends Component {
     super(props);    
     self = this;    
   }
-  componentDidMount() {    
+  componentDidMount() { 
+    Config.OpenStatus = "open";   
     setTimeout(() => {
         this.props.navigation.navigate('Nearby');
     }, 2000);

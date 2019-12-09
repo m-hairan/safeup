@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Image,StatusBar, View,Text,ScrollView,Animated,TouchableOpacity} from 'react-native';
+import {Image,StatusBar, View,Text,ScrollView,Animated,TouchableOpacity,BackHandler} from 'react-native';
 import Styles from '../../common/style';
 import VerifyCompleteDialog from '../../component/dialog/verify_complete'
 import ChooseGuardianDialog from '../../component/dialog/choose_guardian'
@@ -8,6 +8,7 @@ import DemoDialog from '../../component/dialog/demo_dialog'
 import ActivateDialog from '../../component/dialog/activate_dialog'
 import MapView,{PROVIDER_GOOGLE} from 'react-native-maps';
 import {mapStyle} from '../../common/style';
+import GestureRecognizer, {swipeDirections} from 'react-native-swipe-gestures';
 
 
 const { styles } = Styles;
@@ -29,6 +30,8 @@ export default class HomeScreen extends Component {
         isDemo:false,
         isActivate:false
     };
+
+    //this.handleBackButton = this.handleBackButton.bind(this);
   }
   componentDidMount() {    
         this.animateSearch();
@@ -37,6 +40,60 @@ export default class HomeScreen extends Component {
             this.setState({isShowVerificationComplete:true});
         }, 2000);
   }
+
+  componentWillMount() {
+    BackHandler.addEventListener('hardwareBackPress', this.handleBackButtonClick);
+  }
+
+  componentWillUnmount() {
+    BackHandler.removeEventListener('hardwareBackPress', this.handleBackButtonClick);
+  }
+  handleBackButtonClick = () => {
+    // this.props.navigation.popToTop();
+    // return true;
+    console.log("BACK bUTTON");
+    this.props.navigation.goBack('Home');
+    return true;
+  }
+
+  //swipe button part//
+  onSwipeUp = (gestureState) => {
+    console.log("You swiped up!");
+  }
+
+  onSwipeDown = (gestureState) => {
+    console.log("You swiped down!")
+  }
+
+  onSwipeLeft = (gestureState) => {
+    console.log("You swiped left!");
+  }
+
+  onSwipeRight = (gestureState) => {
+    console.log("You swiped right!");
+  }
+
+  onSwipe = (gestureName, gestureState) => {
+    const {SWIPE_UP, SWIPE_DOWN, SWIPE_LEFT, SWIPE_RIGHT} = swipeDirections;
+    this.setState({gestureName: gestureName});
+    switch (gestureName) {
+      case SWIPE_UP:
+        //this.setState({backgroundColor: 'red'});
+        break;
+      case SWIPE_DOWN:
+        //this.setState({backgroundColor: 'green'});
+        break;
+      case SWIPE_LEFT:
+        //this.setState({backgroundColor: 'blue'});
+        //this.setState({isHelp:true});
+        break;
+      case SWIPE_RIGHT:
+        //this.setState({backgroundColor: 'yellow'});
+        this.setState({isHelp:true});
+        break;
+    }
+  }
+  //swipe button part end//
 
   goVerification()
   {
@@ -51,8 +108,16 @@ export default class HomeScreen extends Component {
   openSelectGuard()
   {
     this.setState({isShowSelectGuardian:false});
-    //this.props.navigation.navigate('Contacts');
+    this.props.navigation.navigate('Contacts');
   }
+  // openContacts() {
+  //   this.props.navigation.navigate('Contacts');
+  // }
+  chooseGuardians() {
+    this.setState({isActivate:false});
+    this.setState({isShowSelectGuardian:true});
+  }
+
   openHelp()
   {
     this.setState({isHelp:true});
@@ -101,6 +166,10 @@ export default class HomeScreen extends Component {
   }
   
   render() {
+    const config = {
+        velocityThreshold: 0.3,
+        directionalOffsetThreshold: 80
+    };
 
     return (
         <View style={[styles.fullScreen,styles.centerHorizontal]}>
@@ -159,14 +228,31 @@ export default class HomeScreen extends Component {
                     </View>
                 </View>
                 <View style={{position:'absolute',top:0,height:'100%',width:'100%',alignItems:'center'}}>
-                    <TouchableOpacity  style={{position:'absolute',bottom:100,width:350}} onPress={()=> this.openHelp()}>
+                    {/* <TouchableOpacity  style={{position:'absolute',bottom:100,width:350}} onPress={()=> this.openHelp()}>
                         <View style={[styles.btn,{backgroundColor:'#9723F2',flexDirection:'row',borderRadius:30}]}>
                             <View style={[{backgroundColor:'#771ADD',width:30,height:30,borderRadius:15},styles.centerScreen]}>
                                 <Image style={{width:10,height:15}} source={require('../../assets/ic_play.png')}/>
                             </View>
                             <Text style={[styles.btnText]}>Swipe for Help NOW</Text>
                         </View>
-                    </TouchableOpacity>
+                    </TouchableOpacity> */}
+
+                    <GestureRecognizer
+                        onSwipe={this.onSwipe}
+                        onSwipeUp={this.onSwipeUp}
+                        onSwipeDown={this.onSwipeDown}
+                        onSwipeLeft={this.onSwipeLeft}
+                        onSwipeRight={this.onSwipeRight}
+                        config={config}
+                        style={{position:'absolute',bottom:100,width:350}}>
+                        <View style={[styles.btn,{backgroundColor:'#9723F2',flexDirection:'row',borderRadius:30}]}>
+                            <View style={[{backgroundColor:'#771ADD',width:30,height:30,borderRadius:15},styles.centerScreen]}>
+                                <Image style={{width:10,height:15}} source={require('../../assets/ic_play.png')}/>
+                            </View>
+                            <Text style={[styles.btnText]}>Swipe for Help NOW</Text>
+                        </View>
+                    </GestureRecognizer>
+
                 </View>
           </View>
           {
@@ -194,7 +280,7 @@ export default class HomeScreen extends Component {
           }
           {
               this.state.isActivate?
-              <ActivateDialog/>:
+              <ActivateDialog chooseGuardians={this.chooseGuardians.bind(this)}/>:
               null
           }
         </View>

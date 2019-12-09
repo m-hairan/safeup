@@ -17,16 +17,17 @@ export default class SplashScreen extends Component {
   componentDidMount() {    
     setTimeout(() => {
       this.props.navigation.navigate('Splash2');        
-    }, 2000);
+    }, 5000);
   }
   
   render() {
+    //console.log("I am here=============");
     return (
       <View style={[styles.centerScreen,styles.fullScreen,{backgroundColor:'#9723F2'}]}>
         <StatusBar hidden={true} />
         <View style={{alignItems:'center'}}>
             <Image source={require('../../assets/logo.png')}/>
-            <Text style={{marginTop:45,color:'#fff',fontSize:18,textAlign:'center',fontWeight:'normal',lineHeight: 16}}>
+            <Text style={{marginTop:45,color:'#fff',fontSize:16,textAlign:'center',fontWeight:'normal',lineHeight: 16}}>
                 Women Personal Safety Network {"\n"}{"\n"}- Find safe zones {"\n"}{"\n"}- Call safe line {"\n"}{"\n"}-Keep safe communities
             </Text>
         </View>

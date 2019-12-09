@@ -42,14 +42,14 @@ class MenuGuardian extends Component {
         return (
             <Animated.View style={[{position:'absolute',backgroundColor:'#2A3139',width:350,height:'100%',marginLeft:this.vwTop}]}>
                 <View>
-                    <TouchableOpacity style={{position:'absolute',right:20,top:20}}>
+                    <TouchableOpacity style={{position:'absolute',right:20,top:20}} onPress={()=> this.props.onClose()}>
                         <Image style={{width:20,height:20}} source={require('../../assets/ic_close.png')}/>
                     </TouchableOpacity>
                     <View style={{marginTop:30,flexDirection:'row',alignItems:'center'}}>
-                        <Image resizeMethod="stretch" style={{marginLeft:20,width:90,height:90,borderRadius:45,backgroundColor:'#2A292B',borderWidth:2,borderColor:'#CB9CF0'}}source={require('../../assets/ic_profile_placeholder.png')}/>
+                        <Image resizeMode="stretch" style={{marginLeft:20,width:90,height:90,borderRadius:45,backgroundColor:'#2A292B',borderWidth:2,borderColor:'#CB9CF0'}} source={global.photo}/>
                         <View style={{flex:1,justifyContent:'center',marginLeft:20}}>
-                            <Text style={{color:'#fff'}}>Naor Yanko</Text>
-                            <Text style={{color:'#fff',marginTop:10}}>+972 052 3132132</Text>
+                            <Text style={{color:'#fff'}}>{global.fName} {global.lName}</Text>
+                            <Text style={{color:'#fff',marginTop:10}}>{global.phoneNum}</Text>
                         </View>
                     </View>
                     <View style={{backgroundColor:'#fff',marginLeft:30,marginRight:30,height:2,marginTop:20}}></View>
@@ -59,7 +59,7 @@ class MenuGuardian extends Component {
                                 <Text style={{color:'#fff',flex:1}}>Invite a friend</Text>
                                 <TouchableOpacity style={{marginLeft:10}}>
                                     <View style={{width:80,height:30,backgroundColor:'#9723F2',borderRadius:15,flexDirection:'row',alignItems:'center'}}>
-                                        <Image resizeMethod="stretch" style={{marginLeft:10,width:20,height:20}}source={require('../../assets/ic_share.png')}/>
+                                        <Image resizeMode="stretch" style={{marginLeft:10,width:20,height:20}}source={require('../../assets/ic_share.png')}/>
                                         <Text style={{flex:1,color:'#fff',textAlign:'center',fontSize:10,fontWeight:'bold'}}>Invite</Text>
                                     </View>
                                 </TouchableOpacity>
